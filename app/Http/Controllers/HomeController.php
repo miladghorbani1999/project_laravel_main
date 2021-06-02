@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\post;
+use App\Models\user;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        
+        $this->middleware('auth');   
     }
 
     /**
@@ -21,8 +24,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request,POST $posts)
     {
-        return view('home');
+        
+        $user_auth=Auth::user()->id;
+        $posts=post::where('user_id',$user_auth)->get();
+        $user= User::where('id',$user_auth)->get();
+        $user=$user[0];
+      
+        return view('posts.home',compact('posts','user'));
     }
 }
