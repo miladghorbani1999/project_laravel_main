@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\postController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\commentController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +30,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/posts/add',[postController::class, 'add']);
     Route::post('/posts/store',[postController::class, 'store']);
     Route::get('/posts/delete/{post}',[postController::class, 'delete']);
+    Route::get('/posts/comments/{post}',[commentController::class, 'index']);
+    Route::post('/comments/store/{post}',[commentController::class, 'store']);
+
 
 });

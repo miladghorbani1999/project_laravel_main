@@ -10,7 +10,10 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-
+    protected $table = "users";
+    public function posts(){
+        return $this->hasMany("post");
+      }
     /**
      * The attributes that are mass assignable.
      *

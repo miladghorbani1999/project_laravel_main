@@ -15,8 +15,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        
-        $this->middleware('auth');   
+
+        $this->middleware('auth');
     }
 
     /**
@@ -26,12 +26,10 @@ class HomeController extends Controller
      */
     public function index(Request $request,POST $posts)
     {
-        
-        $user_auth=Auth::user()->id;
-        $posts=post::where('user_id',$user_auth)->get();
-        $user= User::where('id',$user_auth)->get();
-        $user=$user[0];
-      
-        return view('posts.home',compact('posts','user'));
+        $users=user::all();
+        $posts=post::all();
+
+        // dd($posts[0]->user->name);
+        return view('posts.home',compact('posts','users'));
     }
 }

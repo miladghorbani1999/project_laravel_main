@@ -13,21 +13,21 @@
 					<div class="h6 title">Showing 12 Results for: “<span class="c-primary">Mari</span>”</div>
 				</div>
 			</div>
-			@foreach($posts as $post)
+			@foreach($posts as $key=>$post)
 			<div id="search-items-grid">
-				<div class="ui-block">	
-					<article class=" hentry post searches-item">	
+				<div class="ui-block">
+					<article class=" hentry post searches-item">
                         <div class=" post__author author vcard inline-items">
 							<img src="{{asset('/storage/img/avatar75-sm.jpg')}}" alt="author">
 							<div class="author-date">
-								<a class="h6 post__author-name fn" href="02-ProfilePage.html">{{$user->name}}</a>
+								<a class="h6 post__author-name fn" href="02-ProfilePage.html">{{$post->user->name}}</a>
 								<div class="country">مکان</div>
 							</div>
 
 							<span class="notification-icon">
 								<a href="{{url('/posts/delete/'.$post->id)}}" class="">
 									<span class=" without-text">
-										حذف 
+										حذف
 									</span>
 								</a>
 							</span>
@@ -52,8 +52,8 @@
 								</li>
 							</ul>
 							<div class="names-people-likes">
-								<span>نعداد کامنت</span>
-								<a href="#">8 Friends in Common</a>
+								<span>{{count($post->comments)}}</span>
+								<a href="{{url('posts/comments/'.$post->id)}}">تعداد کامنت ها</a>
 							</div>
 							<div class="friend-count">
 								<a href="#" class="friend-count-item">
@@ -62,10 +62,10 @@
 								</a>
 							</div>
 						</div>
-                        
+
 
 					</article>
-					
+
 				</div>
 			</div>
 			@endforeach
