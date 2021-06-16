@@ -8,55 +8,36 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<link rel="stylesheet"  href="{{asset('/css/bootstrap.css')}}">
 	<link rel="stylesheet"  href="{{asset('/css/main.min.css')}}">
+    <script src="https://kit.fontawesome.com/cdc025bad6.js" crossorigin="anonymous"></script>
 </head>
 <body >
 <div class="fixed-sidebar">
 	<div class="fixed-sidebar-left sidebar--small" id="sidebar-left">
 		<a href="02-ProfilePage.html" class="logo">
 			<div class="img-wrap">
-				<img src="{{asset('/storage/img/logo.png')}}" alt="Olympus">
+				<img src="{{asset('/image/logo.png')}}" alt="Olympus">
 			</div>
 		</a>
 	</div>
 </div>
 <div class="fixed-sidebar right">
 	<div class="fixed-sidebar-right sidebar--small" id="sidebar-right">
-
-		<div class="mCustomScrollbar" data-mcs-theme="dark">
-			<ul class="chat-users">
-                <!--عکس سمت راست نوبار-->
-				<li class="inline-items js-chat-open">
-					<div class="author-thumb">
-						<img alt="author" src="{{asset('/storage/img/avatar67-sm.jpg')}}" class="avatar">
-						<span class="icon-status online"></span>
-					</div>
-				</li>
-			</ul>
-		</div>
+		@yield('nav')
 	</div>
 </div>
 
 <header class="header" id="site-header">
 
-	<div class="page-title">
-		<h6>نتایج جستجو</h6>
-	</div>
+
 
 	<div class="header-content-wrapper">
-		<form class="search-bar w-search notification-list friend-requests">
-			<div class="form-group with-button">
-				<input class="form-control js-user-search" placeholder="Search here people or pages..." type="text">
-				</div>
-		</form>
-
-		<a href="#" class="link-find-friend">جستجو دوستان</a>
 
 		<div class="control-block">
 
 			<!--تصویر سمت راست بالا-->
 			<div class="author-page author vcard inline-items more">
 				<div class="author-thumb">
-					<img alt="author" src="/storage/img/author-page.jpg" class="avatar">
+					<img alt="author" src="{{asset('/storage/img/img_person/'.Auth::user()->image->image)}}" class="avatar">
 					<span class="icon-status online"></span>
 					<div class="more-dropdown more-with-triangle">
 						<div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -66,9 +47,9 @@
 
 							<ul class="account-settings">
 								<li>
-									<a href="29-YourAccount-AccountSettings.html">
+									<a href="{{url('/profile/')}}">
 										<svg class="olymp-menu-icon"><use xlink:href="{{asset('/storage/svg-icons/sprites/icons.svg#olymp-menu-icon')}}"></use></svg>
-										<span>ویرایش پروفایل</span>
+										<span>نمایش پروفایل</span>
 									</a>
 								</li>
                                 <li>
@@ -100,7 +81,7 @@
                                  @else
                                      <li class="nav-item ">
                                      <a class="" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                     <svg class="olymp-logout-icon"><use xlink:href="{{asset('/storage/svg-icons/sprites/icons.svg#olymp-logout-icon')}}"></use></svg>    
+                                     <svg class="olymp-logout-icon"><use xlink:href="{{asset('/storage/svg-icons/sprites/icons.svg#olymp-logout-icon')}}"></use></svg>
                                          {{ __('خروج از حساب') }}
                                      </a>
                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -122,7 +103,7 @@
 				</div>
 				<a href="02-ProfilePage.html" class="author-name fn">
 					<div class="author-title">
-						اسم <svg class="olymp-dropdown-arrow-icon"><use xlink:href="{{asset('/storage/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon')}}"></use></svg>
+						{{Auth::user()->name}} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="{{asset('/storage/svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon')}}"></use></svg>
 					</div>
 					<span class="author-subtitle">توضیحات</span>
 				</a>
@@ -138,5 +119,19 @@
 <a class="back-to-top" href="#">
 	<img src="{{asset('/storage/svg-icons/back-to-top.svg')}}" alt="arrow" class="back-icon">
 </a>
+<script src="{{asset('/js/jquery.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/js/popper.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/js/bootstrap-material-design.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/js/jquery.appear.js')}}"></script>
+<script src="{{asset('/js/jquery.mousewheel.js')}}"></script>
+<script src="{{asset('/js/perfect-scrollbar.js')}}"></script>
+<script src="{{asset('/js/popper.min.js')}}"></script>
+<script src="{{asset('/js/material.min.js')}}"></script>
+<script src="{{asset('/js/bootstrap-select.js')}}"></script>
+<script src="{{asset('/js/moment.js')}}"></script>
+<script src="{{asset('/js/base-init.js')}}"></script>
+<script src="{{asset('/Bootstrap/dist/js/bootstrap.bundle.js')}}"></script>
+@yield('scripts')
+
 </body>
 </html>

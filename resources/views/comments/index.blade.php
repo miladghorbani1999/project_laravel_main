@@ -12,9 +12,9 @@
 				<div class="ui-block">
 					<article class=" hentry post searches-item">
                         <div class=" post__author author vcard inline-items">
-                            <img src="{{asset('/storage/img/avatar75-sm.jpg')}}" alt="author">
+                            <img src="{{asset('/storage/img/img_person/'.$post->user->image->image)}}" alt="author">
 							<div class="author-date">
-								<a class="h6 post__author-name fn" href="02-ProfilePage.html">{{$post->user->name}}</a>
+								<a class="h6 post__author-name fn">{{$post->user->name}}</a>
 								<div class="country">مکان</div>
 							</div>
 							<span class="notification-icon">
@@ -26,7 +26,7 @@
 							</span>
 						</div>
                         <div class=" post-block-photo js-zoom-gallery">
-							<img class="mx-auto d-block" src="{{asset('/storage/img/post-photo7.jpg')}}" alt="photo">
+							<img style="width: 80%;height:300px" class="mx-auto d-block" src="{{asset('/storage/img/'.$post->image)}}" alt="photo">
 						</div>
                         <div class="text-right mt-5">
                             <p class="">
@@ -39,23 +39,17 @@
 
 						<div class="post-additional-info row">
 
-							<ul class="col-1 friends-harmonic">
-                                <!--عکس های پایین پست-->
-								<li>
-									<a href="#">
-										<img src="{{asset('/storage/img/friend-harmonic7.jpg')}}" alt="friend">
-									</a>
-								</li>
-							</ul>
-							<div class="col-2 names-people-likes">
-								<span>نعداد کامنت</span>
-								<a href="{{url('posts/comments/'.$post->id)}}">{{count($post->comments)}}</a>
+
+                        <div class="names-people-likes">
+								<span>{{count($post->comments)}}</span>
+								<a href="{{url('posts/comments/'.$post->id)}}">تعداد کامنت ها</a>
 							</div>
-							<div style="float: right;" class="col-8 text-right">
-								<a href="#" class="friend-count-item">
-									<div class="h6">120</div>
-									<div class="title">لایک</div>
-								</a>
+							<div class="friend-count ">
+                            @csrf
+                                <span  class="like"><i name="like"class="check {{ (Auth::user()->like_user()->count()==0)?'far fa-heart':'fas fa-heart'}}"></i>
+                                <span class="countLike h6"><?= $post->like_post()->count() ?></span></span>
+
+                                <input  type="hidden" class=" inputValue" value="{{$post->id}}">
 							</div>
 
 						</div>
@@ -95,4 +89,33 @@
             </div>
 	</div>
 </div>
+@endsection
+@section('scripts')
+<script>
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+    }
+});
+$('.like').click(function(){
+    var code=$('.inputValue').val();
+    $.ajax({
+        type:'POST',
+        url:'/like_check/' + code,
+        success:function(data) {
+            if(data==0){
+                $('span[class="like"]').children().removeClass("fas")
+                $('span[class="like"]').children().addClass("far")
+                $('.countLike').text(parseInt($('.countLike').text())-1);
+            }else{
+                $('span[class="like"]').children().removeClass("far")
+                $('span[class="like"]').children().addClass("fas")
+                $('.countLike').text(parseInt($('.countLike').text())+1);
+            }
+
+        },
+    });
+})
+</script>
 @endsection

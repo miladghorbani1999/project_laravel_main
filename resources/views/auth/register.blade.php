@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<form  action="{{route('register')}}" method="POST">
+<form  action="{{route('register')}}" method="POST" enctype="multipart/form-data">
  @csrf
+    <div class="col col-12 col-xl-12 col-lg-6 col-md-12 col-sm-12">
+        <div class="form-group ">
+            <label for="name" class="control-label">عکس</label>
+            <input id="name" type="file" class="form-control " name="image" required autocomplete="name" autocomplete="name" >
+        </div>
+     </div>
      <div class="col col-12 col-xl-12 col-lg-6 col-md-12 col-sm-12">
          <div class="form-group label-floating is-empty">
              <label for="name" class="control-label">نام</label>

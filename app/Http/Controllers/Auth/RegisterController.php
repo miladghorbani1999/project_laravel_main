@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\image_person;
+
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -49,6 +51,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
+        $ext= $data['image']->getClientOriginalExtension();
+        $image_name=uniqid() .'.'.$ext;
+        $path = $data['image']->storeAs(
+            'img/img_person' ,$image_name
+        );
+        $image_person= new image_person();
+        $image_person->email_user = $data['email'];
+        $image_person->image = $image_name;
+        $image_person->save();
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -64,6 +76,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

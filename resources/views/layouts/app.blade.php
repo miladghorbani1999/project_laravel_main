@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<script src="{{asset('/js/webfontloader.min.js')}}"></script>
+    <script src="https://kit.fontawesome.com/cdc025bad6.js" crossorigin="anonymous"></script>
     <link rel="stylesheet"  href="{{asset('/css/bootstrap.css')}}">
 	<link rel="stylesheet"  href="{{asset('/css/main.min.css')}}">
 	<link rel="stylesheet" href="{{asset('/Bootstrap/dist/css/bootstrap-reboot.css')}}">
@@ -22,8 +23,8 @@
 
 			<a href="#" class="logo">
 				<div class="img-wrap">
-					<img src="{{asset('/storage/img/logo.png')}}" alt="Olympus">
-					<img src="{{asset('/storage/img/logo-colored-small.png')}}" alt="Olympus" class="logo-colored">
+					<img src="{{asset('/image/logo.png')}}" alt="Olympus">
+					<img src="{{asset('/image/logo-colored-small.png')}}" alt="Olympus" class="logo-colored">
 				</div>
 				<div class="title-block">
 					<h6 class="logo-title">olympus</h6>
@@ -66,11 +67,9 @@
                                 </div>
                             </li>
                         @endguest
-						<li class="nav-item">
-							<a href="#" class="nav-link"> خانه</a>
-						</li>
+
                         <li class="nav-item">
-							<a href="#" class="nav-link"> خانه</a>
+							<a href="{{url('/')}}" class="nav-link"> خانه</a>
 						</li>
 						<li class="nav-item js-expanded-menu">
 							<a href="#" class="nav-link">
@@ -114,6 +113,8 @@
 	</div>
 </div>
 <script src="{{asset('/js/jquery-3.2.1.js')}}"></script>
+<script src="{{asset('/js/jquery-3.3.1.min.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{{asset('/js/jquery.appear.js')}}"></script>
 <script src="{{asset('/js/jquery.mousewheel.js')}}"></script>
 <script src="{{asset('/js/perfect-scrollbar.js')}}"></script>

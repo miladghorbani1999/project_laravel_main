@@ -18,4 +18,11 @@ class post extends Model
     public function user(){
         return $this->belongsTo(user::class);
       }
+
+    public function votedUsers(){ //or simply likes
+        return $this->belongsToMany(User::class, 'likes')->withPivot('is_dislike')->withTimestamps();
+    }
+    public function like_post(){
+        return $this->hasMany(likes::class,'post_id')->where('deleted_at',null);
+    }
 }

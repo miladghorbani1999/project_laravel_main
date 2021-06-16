@@ -6,6 +6,8 @@ use App\Models\user;
 
 use Illuminate\Http\Request;
 use App\Models\post;
+use Illuminate\Support\Facades\Redirect;
+
 class postController extends Controller
 {
     /**
@@ -25,7 +27,7 @@ class postController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -38,24 +40,32 @@ class postController extends Controller
 
     public function store(Request $request)
     {
-        $img=145;
+
+
+
         $user_auth = Auth::user()->id;
         $validateData = $request -> validate([
             'title'         =>          'required',
             'description'   =>          'required|min:3|max:255',
         ]);
+
+
+        $ext= $request->file('image')->getClientOriginalExtension();
+        $image_name=uniqid() .'.'.$ext;
+        $path = $request->file('image')->storeAs(
+            'img' ,$image_name
+        );
         $post= new post();
         $post->title = $validateData['title'];
         $post->description = $validateData['description'];
         $post->user_id = $user_auth;
-        $post->image = $img;
+        $post->image = $image_name;
         $post->save();
-        $posts=post::all();
-        return view('posts.add');
+        return redirect()->back();
     }
     public function add(Request $request)
     {
-        
+
         return view('posts.add');
     }
     /**
@@ -105,6 +115,6 @@ class postController extends Controller
 
     public function delete(Post $post){
         $post->delete();
-        return view('welcome');
+        return redirect()->back();
    }
 }

@@ -10,10 +10,15 @@
 
 					<!-- Change Password Form -->
 
-					<form action="{{url('/posts/store/')}}" method="POST">
+					<form action="{{url('/posts/store/')}}" method="POST" enctype="multipart/form-data">
 					@csrf
 						<div class="row">
-
+                            <div   div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="form-group">
+									<label class="control-label">عکس</label>
+									<input style="float: right;" class="form-control" name="image" type="file" >
+								<span class="material-input"></span></div>
+							</div>
 							<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<div class="form-group label-floating">
 									<label class="control-label">تیتر</label>
